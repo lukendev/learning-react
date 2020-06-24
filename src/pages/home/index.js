@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Card from '../../components/card'
 import Header from '../../components/header'
 import Footer from '../../components/footer'
@@ -8,24 +8,45 @@ import Depoimento from '../../components/depoimento'
 // import { Container } from './styles';
 
 function Home() {
-    const listaDeCard = [<Card titulo="Doação de roupas" descricao="Roupa engraçada!"/>, <Card titulo="Doação de Alimento"/>, <Card titulo="Doação de Equipamento"/>]
+    const [stateCard, setStateCard] = useState([
+      // <Card titulo="Doação de roupas" descricao="Roupa engraçada!"/>,
+      // <Card titulo="Doação de Alimento"/>,
+      // <Card titulo="Doação de Equipamento"/>,
+      // <Card titulo="Doação de Equipamento"/>
+    ])
+
+    const [stateDepoimentos, setStateDepoimentos] = useState([
+      // <Depoimento nome="Naty" titulo="A vida ficou mais feliz quando ajudei" texto="Ajudei a pessoa e ela ficou feliz" />,
+      // <Depoimento nome="Naty" titulo="A vida ficou mais feliz quando ajudei" texto="Ajudei a pessoa e ela ficou feliz" />
+    ])
+
+    const logo = ''
 
   //depoimento = Nome da PermissionStatus, Titulo, texto
+
+  function adicionarCard(){
+    setStateCard([...stateCard, <Card />])
+  }
+
+  function adicionarDepoimentos(nome, titulo, texto){
+    setStateDepoimentos([...stateDepoimentos, <Depoimento nome={nome} titulo={titulo} texto={texto} />])
+  }
 
   return (
     <div className="App">
       <Header logado='false'/>  
+      <button onClick={adicionarCard}>Adicionar Doação</button>
+      <button onClick={() => adicionarDepoimentos('Luken', 'Nice', 'lalala')}>Adicionar Depoimento</button>
       <main className="container">
-        {listaDeCard}
+        {stateCard}
       </main>
 
       <Container>
       
       <section>
-        <h1 className="text-center mb-5">Depoimentos</h1>
+        <h1 className="text-center m-3">Depoimentos</h1>
         <div className="d-flex justify-content-center mb-5">
-          <Depoimento nome="Naty" titulo="A vida ficou mais feliz quando ajudei" texto="Ajudei a pessoa e ela ficou feliz" />
-          <Depoimento nome="Naty" titulo="A vida ficou mais feliz quando ajudei" texto="Ajudei a pessoa e ela ficou feliz" />
+          {stateDepoimentos}
         </div>
         
       </section>
